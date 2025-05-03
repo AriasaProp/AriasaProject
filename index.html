@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngoyong</title>
+  <link rel="preload" href="styles/common.css" as="style" onload="this.rel='stylesheet'"/>
+  <link rel="stylesheet" href="styles/index.css"/>
+  <script src="scripts/index.js"></script>
+</head>
+<noscript>
+  <style>
+    body {
+      display: none;
+    }
+    span {
+      background-color: black; color: white;
+      z-index: 1000; display: block; position: fixed;
+      left: 0; right: 0; top: 0; bottom: 0;
+      font-style: bold; font-size: 50pt;
+      text-align: center;
+    }
+  </style>
+  <span>Blocked</span>
+</noscript>
+<body>
+  <div class="big-container" id="header">
+    <nav role="navigation">
+      <i>&#xe80a;</i>
+      <span/>
+      <a>Log In / Sign Up <i>&#xe802;</i></a>
+    </nav>
+  </div>
+  <div class="big-container" id="content">
+    <h1>Ngoyong Site</h1>
+    <h4>Find what you're looking for with our search engine</h4>
+    <form class="big-container" method="GET" onsubmit="searchSubmit(event)">
+      <div id="common-search">
+        <input name="s" type="text" placeholder="Looking for ....."/>
+        <button type="reset"><i>&#xf1f8;</i></button>
+        <button type="submit"><i>&#xe801;</i></button>
+      </div>
+    </form>
+    <p id="result-container"></p>
+  </div>
+  <div class="big-container" id="footer">
+		<h2>Author</h2>
+		<div id="accounts-container">
+  		<a href="mailto:ikomangwidiadaariasa12@gmail.com"><i>&#xe800;</i></a>
+  		<a href="https://github.com/AriasaProp"><i>&#xf300;</i></a>
+		</div>
+    <p>Built by Ariasa_Prop in May, 1 2025</p>
+  </div>
+</body>
+</html>

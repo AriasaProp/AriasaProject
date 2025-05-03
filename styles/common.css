@@ -1,0 +1,137 @@
+/*
+ common style used for all page
+ 
+ global variable should be defined
+ A1 primary color
+ A2 secondary color
+ A3 accent1 color
+ A4 text color
+ B1 primary color for dark mode
+ B2 secondary color for dark mode
+ B3 accent1 color for dark mode
+ B4 text color for dark mode
+ F font-size (pt)
+
+
+*/
+
+@font-face {
+  font-family: 'main';
+  src: url('../font/main.eot?74506845');
+  src: url('../font/main.eot?74506845#iefix') format('embedded-opentype'),
+       url('../font/main.woff2?74506845') format('woff2'),
+       url('../font/main.woff?74506845') format('woff'),
+       url('../font/main.ttf?74506845') format('truetype'),
+       url('../font/main.svg?74506845#main') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+:root {
+  --primary-color: var(--A1, white);
+  --secondary-color: var(--A2, #ebebeb);
+  --accent1-color: var(--A3, #ba1a1a);
+  --text-color: var(--A4, black);
+}
+
+* {
+  /* outline: 1px solid lightgreen; */
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
+.show-on-wide {}
+.hide {
+  display: none;
+}
+.big-container {
+  display: block;
+  text-align: center;
+  align-items: center;
+  padding: .2em;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+  background: var(--primary-color);
+  display: block;
+  font-size: var(--F, 22pt);
+}
+h1 {
+  font-size: 1.8em;
+}
+h4 {
+  font-size: 0.8em;
+}
+p {
+  font-size: 0.7em;
+  text-align: justify;
+}
+a {
+  text-decoration: none;
+}
+i {
+  display: inline;
+  text-decoration: none;
+  font-family: "main";
+  font-style: normal;
+  font-size: inherit;
+  font-weight: normal;
+  speak: never;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button, label, input {
+  border: none;
+  background: none;
+  outline: none;
+}
+button, label {
+  cursor: pointer;
+}
+
+#footer {
+  background-color: rgba(80, 76, 184, 0.2);
+}
+#footer #accounts-container {
+  display: flex;
+  flex-direction: row;
+}
+#footer #accounts-container a {
+  flex: 0 1 40px;
+  width: 40px;
+}
+
+/* wide screen */
+@media screen and (max-width: 800px) {
+  .show-on-wide {
+    display: none;
+  }
+  body {
+    font-size: var(--F, 16pt);
+  }
+}
+/* dark mode */
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: var(--B1, black);
+    --secondary-color: var(--B2, #202020);
+    --accent1-color: var(--B3, #8a1a1a);
+    --text-color: var(--B4, white);
+  }
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100%  */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'main';
+    src: url('../font/main.svg?74506845#main') format('svg');
+  }
+}
