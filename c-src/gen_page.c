@@ -7,6 +7,14 @@
   #error "please define PROJECT_NAME"
 #endif
 
+static int grabline(char **cnt, FILE *src) {
+  size_t l;
+  if ((getline(cnt, &l, src) <= 0) || !l) return 0;
+  char *nl = strstr(*cnt,"\n\0");
+  if (nl) *nl = '\0';
+  return 1;
+}
+
 int main (int argc, char **argv) {
   if (argc < 2) {
     printf("At least give me a name.\n");
@@ -40,7 +48,6 @@ int main (int argc, char **argv) {
     (!memcmp(argv[1],"index", 5)) * THIS_INDEX;
 
   int state = 0;
-  size_t linel;
   char c;
   printf("start generate pages.\n");
   do {
@@ -55,18 +62,15 @@ int main (int argc, char **argv) {
     }
     switch (state++) {                                                                                                                                    
       case 0:
-        if ((getline(&temps, &linel, fcontent) > 0) && (linel > 0)) {
-          temps[linel - 1] = '\0';
+        if (grabline(&temps, fcontent)) {
           fputs(PROJECT_NAME, out);
           fputs(temps, out);
         }
         break;
       case 1:
       case 4:
-        if ((getline(&temps, &linel, fcontent) > 0) && (linel > 0)) {
-          temps[linel - 1] = '\0';
+        if (grabline(&temps, fcontent))
           fputs(temps, out);
-        }
         break;
       case 2:
       case 3:
@@ -79,15 +83,13 @@ int main (int argc, char **argv) {
         fputs(PROJECT_NAME, out);
         break;
       case 7:
-        while ((getline(&temps, &linel, fcontent) > 0) && (linel > 0) && memcmp(temps, "\%END", 4)) {
-          temps[linel - 1] = '\0';
+        while (grabline(&temps, fcontent) && memcmp(temps, "\%END", 4)) {
           fputs("        ", out);
           fputs(temps, out);
         }
         break;
       case 8:
-        while ((getline(&temps, &linel, fcontent) > 0) && (linel > 0)) {
-          temps[linel - 1] = '\0';
+        while (grabline(&temps, fcontent)) {
           fputs("    ", out);
           fputs(temps, out);
         }
