@@ -1,137 +1,234 @@
-/*
- common style used for all page
- 
- global variable should be defined
- A1 primary color
- A2 secondary color
- A3 accent1 color
- A4 text color
- B1 primary color for dark mode
- B2 secondary color for dark mode
- B3 accent1 color for dark mode
- B4 text color for dark mode
- F font-size (pt)
-
-
-*/
-
-@font-face {
-  font-family: 'main';
-  src: url('../font/main.eot?74506845');
-  src: url('../font/main.eot?74506845#iefix') format('embedded-opentype'),
-       url('../font/main.woff2?74506845') format('woff2'),
-       url('../font/main.woff?74506845') format('woff'),
-       url('../font/main.ttf?74506845') format('truetype'),
-       url('../font/main.svg?74506845#main') format('svg');
-  font-weight: normal;
-  font-style: normal;
+/* blocked noscript */
+span #blocked {
+  background-color: black;
+  color: white;
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-style: bold;
+  font-size: 35pt;
+  text-align: center;
 }
-
-
+.material-symbols-outlined {
+  font-size: 1em;
+}
+/* color library - default */
 :root {
-  --primary-color: var(--A1, white);
-  --secondary-color: var(--A2, #ebebeb);
-  --accent1-color: var(--A3, #ba1a1a);
-  --text-color: var(--A4, black);
+  --opposite: #0003;
+  --accent: var(--accentColor, #eee) --font: var(--fontColor, #000);
+  --nav: var(--navColor, #b3b3b3);
+  --body: var(--bodyColor, #efefef);
 }
-
+/* setting default */
 * {
-  /* outline: 1px solid lightgreen; */
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
-  color: inherit;
+  padding: 0;
 }
-
-.show-on-wide {}
+/* global style for some element that used*/
+html {
+  color: var(--font);
+}
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--F1, 19pt);
+  background-color: var(--body);
+}
+button {
+  color: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+input {
+  font-size: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+label {
+  font-weight: 700;
+  font-size: 1em;
+}
+h1 {
+  font-weight: 700;
+  font-size: 1.16em;
+}
+h2 {
+  font-weight: 700;
+  font-size: 1.23em;
+}
+h3 {
+  font-weight: 700;
+  font-size: 1.07em;
+}
+h4 {
+  font-weight: 400;
+  font-size: 1.035em;
+}
+h5 {
+  font-weight: 400;
+  font-size: 1.024em;
+}
+h6 {
+  font-weight: 200;
+  font-size: 1em;
+}
+p {
+  font-size: 1em;
+}
 .hide {
   display: none;
 }
-.big-container {
+header {
   display: block;
-  text-align: center;
+  min-height: 100px;
+}
+header nav {
   align-items: center;
-  padding: .2em;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  color: var(--text-color);
-  background: var(--primary-color);
-  display: block;
-  font-size: var(--F, 22pt);
-}
-h1 {
-  font-size: 1.8em;
-}
-h4 {
-  font-size: 0.8em;
-}
-p {
-  font-size: 0.7em;
-  text-align: justify;
-}
-a {
-  text-decoration: none;
-}
-i {
-  display: inline;
-  text-decoration: none;
-  font-family: "main";
-  font-style: normal;
-  font-size: inherit;
-  font-weight: normal;
-  speak: never;
+  justify-content: center;
   text-align: center;
-  font-variant: normal;
-  text-transform: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  user-select: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  flex-direction: row;
+  padding: 15px 8px 8px 8px;
+  background-color: var(--nav);
+  box-shadow: 0 3px 3px var(--nav);
+  flex-wrap: wrap;
+  z-index: 999;
+  text-shadow: 0 0 1em #0007;
 }
-button, label, input {
-  border: none;
-  background: none;
-  outline: none;
+header nav * {
+  display: flex;
+  margin: 1px;
 }
-button, label {
+header nav:first-child {
+  padding-right: auto;
+  background: yellow;
+}
+header nav a {
+  color: inherit;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  padding: 2.5px;
+  border-radius: 1.5px;
+}
+header nav #nav-expander {
+  border-radius: 3.5px;
+  font-size: 1.2em;
   cursor: pointer;
 }
-
-#footer {
-  background-color: rgba(80, 76, 184, 0.2);
+header nav #nav-expander:hover {
+  background-color: var(--opposite);
 }
-#footer #accounts-container {
+header nav #nav-expander:after {
+  content: '\e8a0';
+}
+header nav input:checked ~ #nav-expander:after {
+  content: '\e5cd';
+}
+header nav form {
+  display: none;
+  flex-grow: 1;
+  text-align: center;
+  flex-wrap: nowrap;
+  margin: 7px;
+  background-color: var(--opposite);
+  overflow: hidden;
+  border-radius: 20px;
+}
+header nav form input {
+  padding-left: 15px;
+  color: black;
+  flex: 1 1 550px;
+}
+header nav form button {
+  padding: 4px 8px;
+}
+header nav form button:hover {
+  background-color: var(--accent);
+}
+header nav input:checked ~ form {
   display: flex;
-  flex-direction: row;
 }
-#footer #accounts-container a {
-  flex: 0 1 40px;
-  width: 40px;
+main {
+  align-items: center;
+  text-align: center;
 }
-
-/* wide screen */
-@media screen and (max-width: 800px) {
-  .show-on-wide {
-    display: none;
-  }
-  body {
-    font-size: var(--F, 16pt);
-  }
+footer {
+  font-size: 0.74em;
+  display: block;
+  color: white;
+  background-color: #0008;
+  padding: 15px 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-/* dark mode */
+footer a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  padding: 3px;
+  border-radius: 8px;
+}
+footer a i {
+  display: inline-block;
+  width: 1.3em;
+  aspect-ratio: 1/1;
+}
+footer a p {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+footer a:hover {
+  background-color: #0008;
+  font-size: 0.97em;
+}
+footer p {
+  text-align: center;
+  display: block;
+}
+/* when dark mode */
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --primary-color: var(--B1, black);
-    --secondary-color: var(--B2, #202020);
-    --accent1-color: var(--B3, #8a1a1a);
-    --text-color: var(--B4, white);
+    --opposite: #fff3;
+    --accent: var(--accentColorDark, #ccc);
+    --font: var(--fontColorDark, #f2f2f2);
+    --nav: var(--navColorDark, #121212);
+    --body: var(--bodyColorDark, #262626);
   }
 }
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100%  */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'main';
-    src: url('../font/main.svg?74506845#main') format('svg');
+/* mobile */
+@media screen and (max-width: 800px) {
+  .hide-on-small {
+    display: none;
+  }
+  header nav {
+    padding: 5px;
+  }
+  header nav form input {
+    padding-left: 15px;
+    width: 250px;
+  }
+}
+/* while screen wide */
+@media screen and (min-width: 800px) {
+  .hide-on-big {
+    display: none;
   }
 }
