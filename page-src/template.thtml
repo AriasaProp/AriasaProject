@@ -18,7 +18,7 @@
       <link rel='stylesheet' href='styles/%%.css'>
     </noscript>
     <script type='text/javascript' src='scripts/common.js' async></script>
-    %%
+    <script type='text/javascript' src='scripts/%%.js' async></script>
   </head>
   <body>
     <noscript><span id='blocked'>Blocked: [need javascript to load!]</span></noscript>

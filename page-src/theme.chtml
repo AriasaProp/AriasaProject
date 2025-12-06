@@ -1,6 +1,4 @@
-- Theme
-Customize theme.
-
-%END
-<main>
+titl: Theme
+desc: Customize theme.
+docs: <main>
 </main>

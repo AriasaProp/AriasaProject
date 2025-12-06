@@ -3,7 +3,7 @@ O		:= bin/objs
 CS	:= c-src
 PS	:= page-src
 DFS := -DPROJECT_NAME="\"Ariasa Project\""
-CFS := -ggdb -MMD -MP -std=c11 -Werror -Wall
+CFS := -MMD -MP -std=gnu11 -Werror -Wall
 LFS	:= -lc -lm
 # MAKEFLAGS += -j4
 
@@ -28,7 +28,7 @@ $(E)/gen_page: $(O)/gen_page.c.o
 $(O)/%.c.o: $(CS)/%.c
 	@mkdir -p $(@D)
 	@$(CC) -c $< -o $@ $(CFS) $(DFS)
-#
+
 # clean generated page
 .PHONY: clean
 clean:
