@@ -120,7 +120,7 @@ end_cnt:
   char c;
   char *t;
   printf("start generate pages.\n");
-  do {
+  while (!feof(ftempl)) {
     if ((c = fgetc(ftempl)) != '%') {
       fputc(c,out);
       continue;
@@ -146,16 +146,15 @@ end_cnt:
         break;
       case 2:
       case 3:
-      case 4:
         fputs(argv[1], out);
         break;
-      case 5:
+      case 4:
         if (!(type & THIS_INDEX)) fputs(" href=\'/\'", out);
         break;
-      case 6:
+      case 5:
         fputs(PROJECT_NAME, out);
         break;
-      case 7: {
+      case 6: {
         char *t1, *t2, *t3;
         while ((t = contents_take(&cnts, CNT_SHRT))) {
           t1 = t;
@@ -165,11 +164,11 @@ end_cnt:
           t3 = strchr(t2, ' ');
           if (!t3) { free ((void*)t); continue; }
           *(t3++) = 0;
-          fprintf(out, "          <li><a href=\'%s\'><i class=\'material-symbols-outlined\'>%s</i><label class=\'hide-on-small\'>%s</label></a></li>", t1,t2,t3);
+          fprintf(out, "        <a href=\'%s\'><i class=\'material-symbols-outlined\'>%s</i><label class=\'hide-on-small\'>%s</label></a>", t1,t2,t3);
           free ((void*)t);
         }
       } break;
-      case 8:
+      case 7:
         if((t = contents_take(&cnts, CNT_DOCS))) {
           fputs(t, out);
           free((void*)t);
@@ -177,7 +176,7 @@ end_cnt:
         break;
       default: goto close;
     }   
-  } while (!feof(ftempl));
+  }
   ret = 0;
   printf("end generate pages.\n");
 close:

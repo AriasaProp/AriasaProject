@@ -1,52 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <title>%%</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta name='author' content='AriasaProp' />
-    <meta name='description' content='%%' />
-    <link rel='preconnect' href='https://fonts.googleapis.com' crossorigin />
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-    <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700' as='style' onload="this.onload=null;this.rel='stylesheet'">
-    <link rel='preload' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght@28,700' as='style' onload="this.onload=null;this.rel='stylesheet'">
-    <link rel='preload' href='styles/common.css' as='style' onload="this.onload=null;this.rel='stylesheet'">
-    <link rel='preload' href='styles/%%.css' as='style' onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700'>
-      <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@700,28'>
-      <link rel='stylesheet' href='styles/common.css'>
-      <link rel='stylesheet' href='styles/%%.css'>
-    </noscript>
-    <script type='text/javascript' src='scripts/common.js' async></script>
-    <script type='text/javascript' src='scripts/%%.js' async></script>
-  </head>
-  <body>
-    <noscript><span id='blocked'>Blocked: [need javascript to load!]</span></noscript>
-    <header>
-      <nav role='navigation'>
-        <input type='checkbox' id='search-switch' class='hide' />
-        <ul>
-          <li><a%%><h2>%%</h2></a></li>
-          <li><span></span></li>
+<head>
+  <title>%%</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta name='author' content='AriasaProp'>
+  <meta name='description' content='%%'>
+  <link rel='preconnect' href='https://fonts.googleapis.com' crossorigin>
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+  <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700' as='style' onload="this.onload=null;this.rel='stylesheet'">
+  <link rel='preload' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght@28,700' as='style' onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@700,28'>
+  </noscript>
+  <link rel='stylesheet' href='styles/common.css'>
+  <link rel='stylesheet' href='styles/%%.css'>
+  <script src='scripts/common.js'></script>
+  <script src='scripts/%%.js' defer></script>
+</head>
+<body>
+  <noscript><span id='blocked'>Blocked: [need javascript to load!]</span></noscript>
+  <header>
+    <nav>
+      <a%%><h3>%%</h3></a>
+      <span></span>
 %%
-          <li><label id='nav-expander' for='search-switch' class='material-symbols-outlined'></label></li>
-        </ul>
-        <form action='/' method='GET'>
-          <input name='s' type='text' placeholder='Search' required />
-          <button type='reset' class='material-symbols-outlined'>&#xe6d0;</button>
-          <button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>
-        </form>
-      </nav>
-    </header>
+      <input id='ai' type='checkbox'>
+      <label id='al' for='ai' class='material-symbols-outlined'></label>
+      <form id='ab' action='/' method='GET'>
+        <input name='s' type='text' placeholder='Search' required>
+        <button type='reset' class='material-symbols-outlined'>&#xe6d0;</button>
+        <button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>
+      </form>
+    </nav>
+  </header>
 %%
-    <footer>
-      <a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>
-      <a href='https://github.com/AriasaProp'><p>Github</p></a>
-      <a href='#'><p>Instagram</p></a>
-      <a href='#'><p>Facebook</p></a>
-      <a href='#'><p>Twitter</p></a>
-      <hr/>
-      <p>2025 AriasaProp | Made for fun!</p>
-    </footer>
-  </body>
+  <footer>
+    <a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>
+    <a href='https://github.com/AriasaProp'><p>Github</p></a>
+    <a href='#'><p>Instagram</p></a>
+    <a href='#'><p>Facebook</p></a>
+    <a href='#'><p>Twitter</p></a>
+    <hr/>
+    <p>2025 AriasaProp | Made for fun!</p>
+  </footer>
+</body>
 </html>

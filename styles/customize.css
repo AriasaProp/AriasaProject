@@ -1,0 +1,184 @@
+main {
+  display: block;
+  text-align: center;
+  align-items: center;
+}
+main h1 {
+  display: block;
+  text-align: center;
+  align-items: center;
+}
+main form {
+  background: var(--opposite);
+  border-radius: 10px;
+  padding: 3px;
+  margin: 3px;
+  align-items: center;
+  display: block;
+}
+main form h4 {
+  text-align: left;
+  vertical-align: middle;
+  padding: 4px;
+}
+#fontSize {
+  display: inline-flex;
+}
+#fontSize p {
+  font-weight: 700;
+  margin: 0 10px;
+}
+#fontSize p:first-child {
+  font-size: 12pt;
+}
+#fontSize p:last-child {
+  font-size: 16pt;
+}
+#fontSize input {
+  flex-grow: 1;
+}
+main button {
+  background-color: hsl(var(--accentColor), 100%, 50%);
+  border-radius: 14px;
+  font-weight: 700;
+  padding: 7px;
+  border-width: 0 0 7px;
+  border-style: solid;
+  border-color: hsl(var(--accentColor), 95%, 40%);
+}
+main button:active {
+  background-color: hsl(var(--accentColor), 95%, 40%);
+}
+main button:disabled {
+  background-color: var(--opposite);
+  border-style: solid;
+  border-color: var(--opposite);
+}
+input[type='range'] {
+  -webkit-appearance: none; 
+  appearance: none;
+  flex-grow: 1;
+  background: hsl(var(--accentColor),100%, 50%);
+  align-items: center;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  cursor: pointer;
+  background: hsl(var(--accentColor),100%,50%);
+}
+input[type='range']::-moz-range-thumb {
+  appearance: none;
+  cursor: pointer;
+  background: hsl(var(--accentColor),100%,50%);
+}
+input[type='range']::-ms-thumb {
+  appearance: none;
+  cursor: pointer;
+  background: hsl(var(--accentColor),100%,50%);
+}
+.jc input {
+  --strs: 100%;
+  --lght: 50%;
+  --thumb: hsl(var(--accentColor),100%,50%);
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(90deg, 
+    hsl(  0,var(--strs),var(--lght)),
+    hsl( 10,var(--strs),var(--lght)),
+    hsl( 20,var(--strs),var(--lght)),
+    hsl( 30,var(--strs),var(--lght)),
+    hsl( 40,var(--strs),var(--lght)),
+    hsl( 50,var(--strs),var(--lght)),
+    hsl( 60,var(--strs),var(--lght)),
+    hsl( 70,var(--strs),var(--lght)),
+    hsl( 80,var(--strs),var(--lght)),
+    hsl( 90,var(--strs),var(--lght)),
+    hsl(100,var(--strs),var(--lght)),
+    hsl(110,var(--strs),var(--lght)),
+    hsl(120,var(--strs),var(--lght)),
+    hsl(130,var(--strs),var(--lght)),
+    hsl(140,var(--strs),var(--lght)),
+    hsl(150,var(--strs),var(--lght)),
+    hsl(160,var(--strs),var(--lght)),
+    hsl(170,var(--strs),var(--lght)),
+    hsl(180,var(--strs),var(--lght)),
+    hsl(190,var(--strs),var(--lght)),
+    hsl(200,var(--strs),var(--lght)),
+    hsl(210,var(--strs),var(--lght)),
+    hsl(220,var(--strs),var(--lght)),
+    hsl(230,var(--strs),var(--lght)),
+    hsl(240,var(--strs),var(--lght)),
+    hsl(250,var(--strs),var(--lght)),
+    hsl(260,var(--strs),var(--lght)),
+    hsl(270,var(--strs),var(--lght)),
+    hsl(280,var(--strs),var(--lght)),
+    hsl(290,var(--strs),var(--lght)),
+    hsl(300,var(--strs),var(--lght)),
+    hsl(310,var(--strs),var(--lght)),
+    hsl(320,var(--strs),var(--lght)),
+    hsl(330,var(--strs),var(--lght)),
+    hsl(340,var(--strs),var(--lght)),
+    hsl(350,var(--strs),var(--lght)),
+    hsl(360,var(--strs),var(--lght))
+  );
+}
+.jc input::-webkit-slider-thumb {
+  border-radius: 5px;
+  width: 12px;
+  height: 31px;
+  border: 1px outset var(--xc);
+  background: hsl(var(--thumb),var(--strs),var(--lght));
+}
+.jc input::-moz-range-thumb {
+  border-radius: 5px;
+  width: 12px;
+  height: 31px;
+  border: 1px outset var(--xc);
+  background: hsl(var(--thumb),var(--strs),var(--lght));
+}
+.jc input::-ms-thumb {
+  border-radius: 5px;
+  width: 12px;
+  height: 31px;
+  border: 1px outset var(--xc);
+  background: hsl(var(--thumb),var(--strs),var(--lght));
+}
+.jc input[name='fontColor']::-webkit-slider-thumb {
+  border: 1px outset var(--pc);
+}
+.jc input[name='fontColor']::-moz-range-thumb {
+  border: 1px outset var(--pc);
+}
+.jc input[name='fontColor']::-ms-thumb {
+  border: 1px outset var(--pc);
+}
+
+input[name='primaryColor'] { --lght: 85%; }
+input[name='accentColor'] { --lght: 50%; }
+input[name='fontColor'] { --lght: 12%; }
+
+.kc input {
+  height: 4px;
+  border-radius: 2px;
+}
+.kc input::-webkit-slider-thumb {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.kc input::-moz-range-thumb {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.kc input::-ms-thumb {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+@media screen and (prefers-color-scheme: dark) {
+  input[name='primaryColor'] { --lght: 15%; }
+  input[name='accentColor'] { --lght: 40%; }
+  input[name='fontColor'] { --lght: 89%; }
+}

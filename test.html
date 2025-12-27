@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>Ariasa Project - Customize</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@700,28'>
+  <link rel='stylesheet' href='styles/common.css'>
+  <link rel='stylesheet' href='styles/customize.css'>
+  <script src='scripts/common.js'></script>
+  <script src='scripts/customize.js' defer></script>
+</head>
+<body>
+  <header>
+    <nav role='navigation'>
+      <input type='radio' id='cls-s' name='navMode' checked>
+      <input type='radio' id='lib-s' name='navMode'>
+      <input type='radio' id='src-s' name='navMode'>
+      <div>
+        <a class='ttl' href='/'><h3>Ariasa Project</h3></a>
+        <span></span>
+        <label id='lib-x' for='lib-s'><i class='material-symbols-outlined'>&#xe9c4;</i><p>More</p></label>
+        <label id='src-x' for='src-s'><i class='material-symbols-outlined'>&#xe8a0;</i><p>Search</p></label>
+        <label id='cls-x' for='cls-s'><i class='material-symbols-outlined'>&#xe5cd;</i></label>
+      </div>
+      <div id='src-b'>
+        <form action='/' method='GET'>
+          <input name='s' type='text' placeholder='Search' required>
+          <button type='reset' class='material-symbols-outlined'>&#xe6d0;</button>
+          <button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>
+        </form>
+      </div>
+      <div id='lib-b'>
+        <a><i class='material-symbols-outlined'>&#xe02f;</i><p>Posts</p></a>
+        <a><i class='material-symbols-outlined'>&#xf5ee;</i><p>Games</p></a>
+      </div>
+    </nav>
+  </header>
+  <footer>
+    <a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>
+    <a href='https://github.com/AriasaProp'><p>Github</p></a>
+    <a href='#'><p>Instagram</p></a>
+    <a href='#'><p>Facebook</p></a>
+    <a href='#'><p>Twitter</p></a>
+    <hr/>
+    <p>2025 AriasaProp | Made for fun!</p>
+  </footer>
+</body>
+</html>

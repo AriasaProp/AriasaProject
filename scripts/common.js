@@ -1,26 +1,18 @@
-// 
-if (!localStorage.getItem('theme-colors'))
-  localStorage.setItem('theme-colors','#b3b3b3#efefef#eee#000#121212#262626#ccc#f2f2f2');
-if (!localStorage.getItem('theme-fontSize'))
-  localStorage.setItem('theme-fontSize', '19');
-function updateColors() {
-  var clr = localStorage.getItem('theme-colors');
-  var clrs = clr.split('#').filter(j => { return j !== ''; });
-  if (clrs.length === 8) {
-    for (let j = 0; j < clrs.length; ++j) clrs[j] = '#' + clrs[j];
-    document.documentElement.style.setProperty('--navColor', clrs[0]);
-    document.documentElement.style.setProperty('--bodyColor', clrs[1]);
-    document.documentElement.style.setProperty('--accentColor', clrs[2]);
-    document.documentElement.style.setProperty('--fontColor', clrs[3]);
-    document.documentElement.style.setProperty('--navColorDark', clrs[4]);
-    document.documentElement.style.setProperty('--bodyColorDark', clrs[5]);
-    document.documentElement.style.setProperty('--accentColorDark', clrs[6]);
-    document.documentElement.style.setProperty('--fontColorDark', clrs[7]);
-  }
+var theme_val = {
+  primaryColor: 210,
+  accentColor: 180,
+  fontColor: 240,
+  fontSize: 14
+};
+const CLR_DEG = 30;
+
+// default data
+let localTheme = localStorage.getItem('Theme');
+if (localTheme) {
+  theme_val = JSON.parse(localTheme);
+} else {
+  localStorage.setItem('Theme', JSON.stringify(theme_val));
 }
-function updateFontSize() {
-  var fz = localStorage.getItem('theme-fontSize');
-  document.documentElement.style.setProperty('--F1', fz + 'pt');
-}
-updateColors();
-updateFontSize();
+Object.keys(theme_val).forEach((k) => {
+  document.documentElement.style.setProperty(`--${k}`, theme_val[k]);
+});
