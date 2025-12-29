@@ -11,7 +11,6 @@ typedef enum : int {
   CNT_TITL = CW('t','i','t','l'),
   CNT_DESC = CW('d','e','s','c'),
   CNT_SHRT = CW('s','h','r','t'),
-  CNT_DOCS = CW('d','o','c','s'),
 } cntId;
 #undef CW
 typedef struct {
@@ -42,11 +41,11 @@ int main (int argc, char **argv) {
   }
   int ret = 1, st;
   Contents cnts = {0};
-  size_t i;
+  size_t i, j;
 #define TEMPZ 2048
   char *temps = (char*)malloc(TEMPZ);
   { // load content file 
-    sprintf(temps, "page-src/%s.chtml", argv[1]);
+    sprintf(temps, "page-src/%s.desc", argv[1]);
     FILE *f = fopen(temps, "r");
     if (!f) {
       printf("Fail to load %s.\n", temps);
@@ -69,12 +68,6 @@ int main (int argc, char **argv) {
           if (fscanf(f, ": %[^\n]\n", temps) <= 0) {
             printf("Failure content format.\n");
             goto end_cnt;
-          }
-          break;
-        case CNT_DOCS:
-          (void)fread(temps, 1, 2, f);
-          if ((i = fread(temps, 1, TEMPZ, f)) < TEMPZ) {
-            temps[i] = 0;
           }
           break;
       }
@@ -113,8 +106,7 @@ end_cnt:
     goto end;
   }
 #define THIS_INDEX 1
-  int type = 
-    (!memcmp(argv[1],"index", 5)) * THIS_INDEX;
+  int type = (!memcmp(argv[1],"index", 5)) * THIS_INDEX;
 
   st = 0;
   char c;
@@ -145,35 +137,34 @@ end_cnt:
         }
         break;
       case 2:
-      case 3:
         fputs(argv[1], out);
         break;
-      case 4:
+      case 3:
         if (!(type & THIS_INDEX)) fputs(" href=\'/\'", out);
         break;
-      case 5:
+      case 4:
         fputs(PROJECT_NAME, out);
         break;
-      case 6: {
-        char *t1, *t2, *t3;
+      case 5: {
+        char *t1, *t2;
         while ((t = contents_take(&cnts, CNT_SHRT))) {
           t1 = t;
           t2 = strchr(t1, ' ');
           if (!t2) { free ((void*)t); continue; }
           *(t2++) = 0;
-          t3 = strchr(t2, ' ');
-          if (!t3) { free ((void*)t); continue; }
-          *(t3++) = 0;
-          fprintf(out, "        <a href=\'%s\'><i class=\'material-symbols-outlined\'>%s</i><label class=\'hide-on-small\'>%s</label></a>", t1,t2,t3);
+          fprintf(out, "      <a href=\'%s\' class=\'material-symbols-outlined\'>%s</a>", t1,t2);
           free ((void*)t);
         }
       } break;
-      case 7:
-        if((t = contents_take(&cnts, CNT_DOCS))) {
-          fputs(t, out);
-          free((void*)t);
-        }
-        break;
+      case 6:  { // docs chtml input
+        sprintf(temps, "page-src/%s.chtml", argv[1]);
+        FILE *chtml = fopen(temps, "r");
+        if (!chtml) goto close;
+        while ((i = fread(temps, 1, TEMPZ, chtml)))
+          while ((i -= (j = fwrite(temps, 1, i, out))))
+            memcpy(temps, temps + j, i);
+        fclose(chtml);
+      } break;
       default: goto close;
     }   
   }

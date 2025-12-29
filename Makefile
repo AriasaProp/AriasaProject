@@ -11,7 +11,7 @@ LFS	:= -lc -lm
 start:
 	python -m http.server -d . 8080
 .PHONY: gp
-gp: index.html customize.html
+gp: index.html pref.html
 .PHONY: up
 up:
 	@git add .

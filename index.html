@@ -1,52 +1,44 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title>Ariasa Project</title>
+  <title>Fermity</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <meta name='author' content='AriasaProp'>
   <meta name='description' content=' - Homepage & Introduction feature.'>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel='preconnect' href='https://fonts.googleapis.com' crossorigin>
   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
   <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700' as='style' onload="this.onload=null;this.rel='stylesheet'">
   <link rel='preload' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght@28,700' as='style' onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@700,28'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@200,28'>
   </noscript>
   <link rel='stylesheet' href='styles/common.css'>
   <link rel='stylesheet' href='styles/index.css'>
   <script src='scripts/common.js'></script>
-  <script src='scripts/index.js' defer></script>
 </head>
 <body>
   <noscript><span id='blocked'>Blocked: [need javascript to load!]</span></noscript>
   <header>
-    <nav role='navigation'>
-      <input type='radio' id='cls-s' name='navMode' checked>
-      <input type='radio' id='lib-s' name='navMode'>
-      <input type='radio' id='src-s' name='navMode'>
-      <div id='x-b'>
-        <a><h3>Ariasa Project</h3></a>
-        <span></span>
-        <a href='/customize.html'><i class='material-symbols-outlined'>&#xf859;</i><label class='hide-on-small'>Customize</label></a>
-        <label id='cls-x' for='cls-s' class='qBtn'><i class='material-symbols-outlined'>&#xe5cd;</i></label>
-        <label id='lib-x' for='lib-s' class='qBtn'><i class='material-symbols-outlined'>&#xe9c4;</i><p class='sml-h'>More</p></label>
-        <label id='src-x' for='src-s' class='qBtn'><i class='material-symbols-outlined'>&#xe8a0;</i><p class='sml-h'>Search</p></label>
-      </div>
-      <form id='src-b' action='/' method='GET'>
+    <nav>
+      <a><h2>Fermity</h2></a>
+      <span></span>
+      <a href='/pref.html' class='material-symbols-outlined'>&#xf859;</a>
+      <input id='ai' type='checkbox'>
+      <label id='al' for='ai' class='material-symbols-outlined'></label>
+      <form id='ab' action='/' method='GET'>
         <input name='s' type='text' placeholder='Search' required>
-        <button type='reset' class='qBtn material-symbols-outlined'>&#xe6d0;</button>
-        <button type='submit' class='qBtn material-symbols-outlined'>&#xe8b6;</button>
+        <button type='reset' class='material-symbols-outlined'>&#xe6d0;</button>
+        <button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>
       </form>
-      <div id='lib-b'>
-        <a class='qBtn'><i class='material-symbols-outlined'>&#xe02f;</i><p class='sml-h'>Posts</p></a>
-        <a class='qBtn'><i class='material-symbols-outlined'>&#xf5ee;</i><p class='sml-h'>Games</p></a>
-      </div>
     </nav>
   </header>
-<main>
-</main>
-
+  <main>
+  </main>
   <footer>
     <a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>
     <a href='https://github.com/AriasaProp'><p>Github</p></a>
