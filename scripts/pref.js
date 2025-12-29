@@ -1,46 +1,47 @@
 const cp = Math.PI / 180;
-function clrPickC(p, rad) {
-  const r = Math.min(p.s.x, p.s.y) * 0.9;
-  const d = r * 0.7; // thickness of pallete
+function clrPickC(p, radi) {
+  let rad = 0;
+  if (radi) p.obj.value = rad = parseInt(radi);
+  else rad = parseInt(p.obj.value);
+  const r = Math.min(p.canvas.clientWidth, p.canvas.clientHeight) * 0.46;
+  const d = r * 0.64; // thickness of pallete
   const ctx = p.ctx;
-  for (i = 0; i < 360; i++) {
+  for (i = rad + 1; i !== rad; i = (i + 1) % 360) {
     ctx.fillStyle = `hsl(${i}, 100%, 50%)`;
     ctx.beginPath();
     let inArcX  = Math.cos(cp * (i - 0.5));
     let inArcY  = Math.sin(cp * (i - 0.5));
-    ctx.moveTo(p.s.x + d * inArcX,p.s.y + d * inArcY);
-    ctx.lineTo(p.s.x + r * inArcX,p.s.y + r * inArcY);
+    ctx.moveTo(d * inArcX,d * inArcY);
+    ctx.lineTo(r * inArcX,r * inArcY);
     inArcX  = Math.cos(cp * (i + 0.5));
     inArcY  = Math.sin(cp * (i + 0.5));
-    ctx.lineTo(p.s.x + r * inArcX,p.s.y + r * inArcY);
-    ctx.lineTo(p.s.x + d * inArcX,p.s.y + d * inArcY);
+    ctx.lineTo(r * inArcX,r * inArcY);
+    ctx.lineTo(d * inArcX,d * inArcY);
     ctx.closePath();
     ctx.fill();
   }
   ctx.fillStyle = `hsl(${rad}, 100%, 50%)`;
   ctx.beginPath();
-  ctx.arc(p.s.x, p.s.y, d, 0, Math.PI * 2);
+  ctx.arc(0, 0, d, 0, Math.PI * 2);
   ctx.closePath();
   ctx.fill();
   ctx.strokeStyle = 'black';
   ctx.beginPath();
-  ctx.moveTo(p.s.x + (d - 5) * Math.cos(cp * (rad + 0.0)), p.s.y + (d - 5) * Math.sin(cp * (rad + 0.0)));
-  ctx.lineTo(p.s.x + (r + 5) * Math.cos(cp * (rad + 2.5)), p.s.y + (r + 5) * Math.sin(cp * (rad + 2.5)));
-  ctx.lineTo(p.s.x + (r + 5) * Math.cos(cp * (rad - 2.5)), p.s.y + (r + 5) * Math.sin(cp * (rad - 2.5)));
+  ctx.moveTo((d - 5) * Math.cos(cp * (rad + 0.0)), (d - 5) * Math.sin(cp * (rad + 0.0)));
+  ctx.lineTo((r + 5) * Math.cos(cp * (rad + 2.5)), (r + 5) * Math.sin(cp * (rad + 2.5)));
+  ctx.lineTo((r + 5) * Math.cos(cp * (rad - 2.5)), (r + 5) * Math.sin(cp * (rad - 2.5)));
   ctx.closePath();
   ctx.fill();
   ctx.stroke();
   ctx.fillStyle = 'black';
-  ctx.textAlign = 'center';
-  ctx.font = "normal 700 1.1em Roboto, sans-serif";
   ctx.textBaseline = 'bottom';
-  ctx.fillText(p.n, p.s.x, p.s.y);
+  ctx.fillText(p.n, 0, 0);
   ctx.textBaseline = 'top';
-  ctx.fillText('Color', p.s.x, p.s.y);
+  ctx.fillText('Color', 0, 0);
 }
 function redrawClrPickC(p, rad) {
-  ctx.clearRect(0, 0, p.canvas.clientWidth, p.canvas.clientHeight);
-  clrPickC(p, parseInt(rad));
+  p.ctx.clearRect(-p.canvas.clientWidth * 0.5, -p.canvas.clientHeight * 0.5, p.canvas.clientWidth, p.canvas.clientHeight);
+  clrPickC(p, rad);
 }
 let colorPickerConstant = [
   {k: 'primaryColor',n: 'Primary'},
@@ -50,17 +51,15 @@ colorPickerConstant.forEach(p => {
   p.obj = sett.elements[p.k];
   p.canvas = p.obj.parentNode;
   p.ctx = p.canvas.getContext('2d');
-  p.s = {
-    x: p.canvas.clientWidth * 0.5,
-    y: p.canvas.clientHeight * 0.5
-  };
-  clrPickC(p, parseInt(theme_val[p.k]));
-  p.obj.value = parseInt(theme_val[p.k]);
+  p.ctx.textAlign = 'center';
+  p.ctx.font = "normal 700 1.1em Roboto, sans-serif";
+  p.ctx.translate(p.canvas.clientWidth * 0.5, p.canvas.clientHeight * 0.5);
+  clrPickC(p, theme_val[p.k]);
   p.canvas.addEventListener('click', (e) => {
-    let rad = Math.round(180 + Math.atan2(p.s.y - e.offsetY, p.s.x - e.offsetX) / cp);
+    const tan = Math.atan2(p.canvas.clientHeight * 0.5 - e.offsetY, p.canvas.clientWidth * 0.5 - e.offsetX);
+    const rad = Math.round(180 + tan / cp);
     if (parseInt(p.obj.value) === rad) return;
-    redrawClrPickC(p, parseInt(rad));
-    p.obj.value = rad;
+    redrawClrPickC(p, rad);
     sett.dispatchEvent(new Event('change'));
   });
 });
@@ -73,11 +72,7 @@ sett.addEventListener('change', (e) => {
 sett.addEventListener('reset', (e) => {
   areset.disabled = true;
   asubmit.disabled = true;
-  
-  colorPickerConstant.forEach(p => {
-    redrawClrPickC(p, theme_val[p.k]);
-    p.obj.value = parseInt(theme_val[p.k]);
-  });
+  colorPickerConstant.forEach(p => redrawClrPickC(p, theme_val[p.k]));
 });
 sett.addEventListener('submit', (e) => {
   areset.disabled = true;
@@ -91,8 +86,5 @@ sett.addEventListener('submit', (e) => {
     }
   });
   localStorage.setItem('Theme', JSON.stringify(theme_val));
-  colorPickerConstant.forEach(p => {
-    redrawClrPickC(p, theme_val[p.k]);
-    p.obj.value = parseInt(theme_val[p.k]);
-  });
+  colorPickerConstant.forEach(p => redrawClrPickC(p, theme_val[p.k]));
 });

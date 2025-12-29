@@ -7,6 +7,11 @@ CFS := -MMD -MP -std=gnu11 -Werror -Wall
 LFS	:= -lc -lm
 # MAKEFLAGS += -j4
 
+.PHONY: setg
+setg:
+	git config --global user.name "AriasaProp"
+	git config --global user.email "ikomangwidiadaariasa12@gmail.com"
+
 .PHONY: start
 start:
 	python -m http.server -d . 8080
