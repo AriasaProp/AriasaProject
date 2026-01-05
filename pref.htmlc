@@ -1,3 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>Fermity - Preference</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta name='author' content='AriasaProp'>
+  <meta name='description' content='Preference Theme.'>
+  <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png'>
+  <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+  <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+  <link rel='manifest' href='/site.webmanifest'>
+  <link rel='preconnect' href='https://fonts.googleapis.com' crossorigin>
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+  <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700' as='style' onload="this.onload=null;this.rel='stylesheet'">
+  <link rel='preload' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght@28,700' as='style' onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,opsz@200,28'>
+  </noscript>
+  <link rel='stylesheet' href='styles/common.css'>
+  <link rel='stylesheet' href='styles/pref.css'>
+  <script src='scripts/common.js'></script>
+</head>
+<body>
+  <noscript><span id='blocked'>Blocked: [need javascript to load!]</span></noscript>
+  <header>
+    <nav>
+      <a href='/'><h2>Fermity</h2></a>
+      <span></span>
+      <input id='ai' type='checkbox'>
+      <label id='al' for='ai' class='material-symbols-outlined'></label>
+      <form id='ab' action='/' method='GET'>
+        <input name='s' type='text' placeholder='Search' required>
+        <button type='reset' class='material-symbols-outlined'>&#xe6d0;</button>
+        <button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>
+      </form>
+    </nav>
+  </header>
   <main>
     <h1>Customize</h1>
     <form id='sett'>
@@ -101,4 +139,14 @@ sett.addEventListener('submit', (e) => {
   localStorage.setItem('Theme', JSON.stringify(theme_val));
   colorPickerConstant.forEach(p => redrawClrPickC(p, theme_val[p.k]));
 });
-  </script>
+  </script>  <footer>
+    <a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>
+    <a href='https://github.com/AriasaProp'><p>Github</p></a>
+    <a href='#'><p>Instagram</p></a>
+    <a href='#'><p>Facebook</p></a>
+    <a href='#'><p>Twitter</p></a>
+    <hr/>
+    <p>2025 AriasaProp | Made for fun!</p>
+  </footer>
+</body>
+</html>

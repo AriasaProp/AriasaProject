@@ -27,7 +27,7 @@
   padding: 0;
 }
 html {
-  color: hsl(var(--fontColor),100%,12%);
+  color: hsl(var(--fontColor),100%,9%);
 }
 body {
   display: flex;
@@ -158,7 +158,7 @@ footer p {
   .hs { display: none; }
   #al { 
     display: inline-block;
-    background-color: hsla(var(--accentColor), 100%, 50%, 50%);
+    background-color: hsla(var(--accentColor), 100%, 60%, 50%);
     border-radius: 5px;
     padding: 5px;
   }
@@ -184,12 +184,15 @@ footer p {
     --opposite: #fff3;
   }
   html {
-    color: hsl(var(--fontColor),100%,89%);
+    color: hsl(var(--fontColor),100%,91%);
   }
   body {
     background-color: hsl(var(--primaryColor),40%,15%);
   }
   nav {
     background-color: hsl(var(--primaryColor), 100%, 15%);
+  }
+  #al { 
+    background-color: hsla(var(--accentColor), 100%, 31%, 50%);
   }
 }

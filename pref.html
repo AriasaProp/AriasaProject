@@ -4,11 +4,11 @@
   <title>Fermity - Preference</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <meta name='author' content='AriasaProp'>
-  <meta name='description' content=' - Preference Theme.'>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <meta name='description' content='Preference Theme.'>
+  <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png'>
+  <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+  <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+  <link rel='manifest' href='/site.webmanifest'>
   <link rel='preconnect' href='https://fonts.googleapis.com' crossorigin>
   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
   <link rel='preload' href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700' as='style' onload="this.onload=null;this.rel='stylesheet'">
@@ -27,7 +27,6 @@
     <nav>
       <a href='/'><h2>Fermity</h2></a>
       <span></span>
-
       <input id='ai' type='checkbox'>
       <label id='al' for='ai' class='material-symbols-outlined'></label>
       <form id='ab' action='/' method='GET'>
@@ -37,82 +36,79 @@
       </form>
     </nav>
   </header>
-  <main id='main'>
+  <main>
     <h1>Customize</h1>
-    <form>
-      <canvas width='180px' height='180px'><input type='hidden' name='primaryColor'></canvas>
-      <canvas width='180px' height='180px'><input type='hidden' name='accentColor'></canvas>
-      <canvas width='180px' height='180px'><input type='hidden' name='fontColor'></canvas>
+    <form id='sett'>
+      <label for='primaryColor'>
+        <p>Primary Color</p>
+        <input type='hidden' name='primaryColor'>
+        <span></span>
+      </label>
+      <label for='accentColor'>
+        <p>Accent Color</p>
+        <input type='hidden' name='accentColor'>
+        <span></span>
+      </label>
+      <label for='fontColor'>
+        <p>Font Color</p>
+        <input type='hidden' name='fontColor'>
+        <span></span>
+      </label>
       <br>
-      <div class='kc'><h4>Font Size</h4><p>A</p><input name='fontSize' type='range' min='12' step='1' max='16'><p>A</p></div>
+      <div class='kc'>
+        <h4>Font Size</h4>
+        <div>
+          <p>A</p>
+          <input name='fontSize' type='range' min='12' step='1' max='16'>
+          <p>A</p>
+        </div>
+      </div>
       <br>
       <button type='reset' disabled><i class='material-symbols-outlined'>&#xe872;</i>Reset</button>
       <button type='submit' disabled><i class='material-symbols-outlined'>&#xf5a6;</i>Apply</button>
     </form>
   </main>
   <script>
-const cp = Math.PI / 180;
-function clrPickC(p, radi) {
-  let rad = 0;
-  if (radi) p.obj.value = rad = parseInt(radi);
-  else rad = parseInt(p.obj.value);
-  const r = Math.min(p.canvas.clientWidth, p.canvas.clientHeight) * 0.46;
-  const d = r * 0.64; // thickness of pallete
-  const ctx = p.ctx;
-  for (i = rad + 1; i !== rad; i = (i + 1) % 360) {
-    ctx.fillStyle = `hsl(${i}, 100%, 50%)`;
-    ctx.beginPath();
-    let inArcX  = Math.cos(cp * (i - 0.5));
-    let inArcY  = Math.sin(cp * (i - 0.5));
-    ctx.moveTo(d * inArcX,d * inArcY);
-    ctx.lineTo(r * inArcX,r * inArcY);
-    inArcX  = Math.cos(cp * (i + 0.5));
-    inArcY  = Math.sin(cp * (i + 0.5));
-    ctx.lineTo(r * inArcX,r * inArcY);
-    ctx.lineTo(d * inArcX,d * inArcY);
-    ctx.closePath();
-    ctx.fill();
+function updateColorPicker(p, a, b) {
+  if (!p) return;
+  if (!a) return;
+  let pos = {x: 0,y: 0};
+  let deg;
+  if (b) { // input offset
+    pos.x = a - p.c.x, 
+    pos.y = b - p.c.y
+    deg = Math.round(180 * (1 + Math.atan2(pos.y, pos.x) / Math.PI));
+    const scl = 60 / Math.sqrt(Math.pow(pos.x, 2) + Math.pow(pos.y, 2));
+    pos.x *= scl;
+    pos.y *= scl;
+  } else {
+    deg = parseInt(a);
+    pos.x = 60 * -Math.cos(deg / 180 * Math.PI);
+    pos.y = 60 * -Math.sin(deg / 180 * Math.PI);
   }
-  ctx.fillStyle = `hsl(${rad}, 100%, 50%)`;
-  ctx.beginPath();
-  ctx.arc(0, 0, d, 0, Math.PI * 2);
-  ctx.closePath();
-  ctx.fill();
-  ctx.strokeStyle = 'black';
-  ctx.beginPath();
-  ctx.moveTo((d - 5) * Math.cos(cp * (rad + 0.0)), (d - 5) * Math.sin(cp * (rad + 0.0)));
-  ctx.lineTo((r + 5) * Math.cos(cp * (rad + 2.5)), (r + 5) * Math.sin(cp * (rad + 2.5)));
-  ctx.lineTo((r + 5) * Math.cos(cp * (rad - 2.5)), (r + 5) * Math.sin(cp * (rad - 2.5)));
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = 'black';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText(p.n, 0, 0);
-  ctx.textBaseline = 'top';
-  ctx.fillText('Color', 0, 0);
-}
-function redrawClrPickC(p, rad) {
-  p.ctx.clearRect(-p.canvas.clientWidth * 0.5, -p.canvas.clientHeight * 0.5, p.canvas.clientWidth, p.canvas.clientHeight);
-  clrPickC(p, rad);
+  p.obj.value = deg;
+  pos.x -= p.knob.clientWidth * 0.5;
+  pos.y -= p.knob.clientHeight * 0.5;
+  p.knob.style.rotate = `${deg - 135}deg`;
+  p.knob.style.translate =`${pos.x}px ${pos.y}px`;
+  const lg = getComputedStyle(p.obj).getPropertyValue('--lght');
+  p.lbl.style.setProperty('--hue', deg);
 }
 let colorPickerConstant = [
-  {k: 'primaryColor',n: 'Primary'},
-  {k: 'accentColor',n: 'Accent'},
-  {k: 'fontColor',n: 'Font'}];
+  {k: 'primaryColor'},
+  {k: 'accentColor'},
+  {k: 'fontColor'}];
 colorPickerConstant.forEach(p => {
   p.obj = sett.elements[p.k];
-  p.canvas = p.obj.parentNode;
-  p.ctx = p.canvas.getContext('2d');
-  p.ctx.textAlign = 'center';
-  p.ctx.font = "normal 700 1.1em Roboto, sans-serif";
-  p.ctx.translate(p.canvas.clientWidth * 0.5, p.canvas.clientHeight * 0.5);
-  clrPickC(p, theme_val[p.k]);
-  p.canvas.addEventListener('click', (e) => {
-    const tan = Math.atan2(p.canvas.clientHeight * 0.5 - e.offsetY, p.canvas.clientWidth * 0.5 - e.offsetX);
-    const rad = Math.round(180 + tan / cp);
-    if (parseInt(p.obj.value) === rad) return;
-    redrawClrPickC(p, rad);
+  p.lbl = p.obj.parentNode;
+  p.knob = p.lbl.children[2];
+  p.c = {
+    x: p.lbl.clientWidth * 0.5,
+    y: p.lbl.clientHeight * 0.5
+  };
+  updateColorPicker(p, theme_val[p.k]);
+  p.lbl.addEventListener('click', e => {
+    updateColorPicker(p, e.offsetX, e.offsetY);
     sett.dispatchEvent(new Event('change'));
   });
 });
@@ -125,7 +121,9 @@ sett.addEventListener('change', (e) => {
 sett.addEventListener('reset', (e) => {
   areset.disabled = true;
   asubmit.disabled = true;
-  colorPickerConstant.forEach(p => redrawClrPickC(p, theme_val[p.k]));
+  colorPickerConstant.forEach(p => {
+    updateColorPicker(p, theme_val[p.k]);
+  });
 });
 sett.addEventListener('submit', (e) => {
   areset.disabled = true;
@@ -153,4 +151,3 @@ sett.addEventListener('submit', (e) => {
   </footer>
 </body>
 </html>
-�

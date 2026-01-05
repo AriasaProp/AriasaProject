@@ -3,23 +3,28 @@ O		:= bin/objs
 CS	:= c-src
 PS	:= page-src
 DFS := -DPROJECT_NAME="\"Fermity\""
-CFS := -MMD -MP -std=gnu11 -Werror -Wall
+CFS := -MMD -MP -std=gnu11 -Werror -Wall -I.
 LFS	:= -lc -lm
 # MAKEFLAGS += -j4
 
 .PHONY: start
 start:
 	python -m http.server -d . 8080
+
 .PHONY: gp
-gp: index.html pref.html
+gp: index.html pref.html 
+	
 .PHONY: up
 up:
 	@git add .
 	@git commit -m "up"
 	@git push
 
+ty: c-src/ty.c
+	@$(CC) $< -o $@ $(LFS)
+
 #generate html files
-%.html: $(E)/gen_page $(PS)/template.thtml $(PS)/%.chtml
+%.html: $(E)/gen_page $(PS)/%.chtml
 	@./$< $(basename $@) 
 
 $(E)/gen_page: $(O)/gen_page.c.o

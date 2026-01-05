@@ -1,11 +1,24 @@
+#ifndef PROJECT_NAME
+  #error "please define PROJECT_NAME"
+#endif
+
+#define NEWLINE "\n"
+#define TB      "  "
+#define TB2X    "    "
+#define TB3XXX  "      "
+#define TB4XXXX "        "
+#include "page_template.h"
+
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/sendfile.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
-#ifndef PROJECT_NAME
-  #error "please define PROJECT_NAME"
-#endif
 #define CW(A,B,C,D) (A | (B << 8) | (C << 16) | (D << 24))
 typedef enum : int {
   CNT_TITL = CW('t','i','t','l'),
@@ -21,7 +34,6 @@ typedef struct {
   Content *dat;
   size_t len, cap;
 } Contents;
-
 static char *contents_take(Contents *c, cntId id) {
   size_t i;
   for (i = 0; i < c->len; ++i) if (c->dat[i].id == id) {
@@ -39,11 +51,12 @@ int main (int argc, char **argv) {
     printf("At least give me a name.\n");
     return 1;
   }
-  int ret = 1, st;
-  Contents cnts = {0};
-  size_t i, j;
 #define TEMPZ 2048
   char *temps = (char*)malloc(TEMPZ);
+  int ret = 1;
+  int st = 0;
+  Contents cnts = {0};
+  size_t i;
   { // load content file 
     sprintf(temps, "page-src/%s.desc", argv[1]);
     FILE *f = fopen(temps, "r");
@@ -92,87 +105,66 @@ end_cnt:
       goto end;
     }
   }
-  sprintf(temps, "page-src/template.thtml");
-  FILE *ftempl = fopen(temps, "r");
-  if (!ftempl) {
-    printf("Fail to load %s.\n", temps);
-    goto end;
-  }
   sprintf(temps, "%s.html", argv[1]);
-  FILE *out = fopen(temps, "w");
-  if (!out) {
-    fclose(ftempl);
-    printf("Fail to write %s.\n", temps);
+  int out = creat(temps, S_IRUSR | S_IWUSR);
+  if (out < 0) {
+    printf("Fail to open %s.\n", temps);
     goto end;
   }
-#define THIS_INDEX 1
-  int type = (!memcmp(argv[1],"index", 5)) * THIS_INDEX;
-
-  st = 0;
-  char c;
-  char *t;
   printf("start generate pages.\n");
-  while (!feof(ftempl)) {
-    if ((c = fgetc(ftempl)) != '%') {
-      fputc(c,out);
-      continue;
+  {
+    char *desc = contents_take(&cnts, CNT_DESC);
+    if (!desc) {
+      printf("Content doesn\'t have description");
+      goto close;
     }
-    if ((c = fgetc(ftempl)) != '%') {
-      fputc('%',out);
-      fputc(c,out);
-      continue;
+    {
+      char *titl = contents_take(&cnts, CNT_TITL);
+      if (!titl) {
+        temps[0] = 0;
+      } else {
+        sprintf(temps, " - %s", t1);
+        free((void*)titl);
+      }
     }
-    switch (st++) {                                                                                                                                    
-      case 0:
-        fputs(PROJECT_NAME, out);
-        if ((t = contents_take(&cnts, CNT_TITL))) {
-          fprintf(out, " - %s", t);
-          free ((void*)t);
-        }
-        break;
-      case 1:
-        if ((t = contents_take(&cnts, CNT_DESC))) {
-          fprintf(out, " - %s", t);
-          free ((void*)t);
-        }
-        break;
-      case 2:
-        fputs(argv[1], out);
-        break;
-      case 3:
-        if (!(type & THIS_INDEX)) fputs(" href=\'/\'", out);
-        break;
-      case 4:
-        fputs(PROJECT_NAME, out);
-        break;
-      case 5: {
-        char *t1, *t2;
-        while ((t = contents_take(&cnts, CNT_SHRT))) {
-          t1 = t;
-          t2 = strchr(t1, ' ');
-          if (!t2) { free ((void*)t); continue; }
-          *(t2++) = 0;
-          fprintf(out, "      <a href=\'%s\' class=\'material-symbols-outlined\'>%s</a>", t1,t2);
-          free ((void*)t);
-        }
-      } break;
-      case 6:  { // docs chtml input
-        sprintf(temps, "page-src/%s.chtml", argv[1]);
-        FILE *chtml = fopen(temps, "r");
-        if (!chtml) goto close;
-        while ((i = fread(temps, 1, TEMPZ, chtml)))
-          while ((i -= (j = fwrite(temps, 1, i, out))))
-            memcpy(temps, temps + j, i);
-        fclose(chtml);
-      } break;
-      default: goto close;
-    }   
+    int isIndex = !memcmp(argv[1],"index", 5);
+    dprintf(out, base_page_template[0],temps, desc, argv[1],isIndex ? "" : " href=\'/\'");
+    free ((void*)desc);
   }
+  // input shortcuts 
+  for (char *t1; (t1 = contents_take(&cnts, CNT_SHRT)); ) {
+    char *t2 = strchr(t1, ' ');
+    if (t2) {
+      *(t2++) = 0;
+      dprintf(out, base_page_template[1], t1,t2);
+    }
+    free ((void*)t1);
+  }
+  dprintf(out, base_page_template[2]);
+  { // docs chtml input
+    sprintf(temps, "page-src/%s.chtml", argv[1]);
+    int in = open(temps, O_RDONLY);
+    if (in < 0) {
+      printf("Fail to open %s", temps);
+      goto close;
+    }
+    struct stat st;
+    if (fstat(in, &st) < 0) {
+      printf("Fail to get fstat on content file");
+      goto close;
+    }
+    if (sendfile(out, in, NULL, st.st_size) < 0) {
+      printf("Fail to sendfile %s", strerror(errno));
+      close(in);
+      goto close;
+    }
+    close(in);
+  }
+  dprintf(out, base_page_template[3]);
   ret = 0;
   printf("end generate pages.\n");
 close:
-  fclose(ftempl);
-  fclose(out);
+  close(out);
   for (i = 0; i < cnts.len; ++i)
     free((void*)cnts.dat[i].str);
   free(cnts.dat);

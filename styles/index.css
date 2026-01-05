@@ -1,0 +1,75 @@
+#X {
+  width: 145px;
+  height: 145px;
+  border-style: solid;
+  border-width: 30px;
+  border-color: transparent;
+  border-radius: 50%;
+  display: inline-flex;
+  --lght: 50%;
+  font-weight: 700;
+  background-image: linear-gradient(white, white), 
+    conic-gradient(
+      hsl(  0,100%,var(--lght)),
+      hsl( 30,100%,var(--lght)),
+      hsl( 60,100%,var(--lght)),
+      hsl( 90,100%,var(--lght)),
+      hsl(120,100%,var(--lght)),
+      hsl(150,100%,var(--lght)),
+      hsl(180,100%,var(--lght)),
+      hsl(210,100%,var(--lght)),
+      hsl(240,100%,var(--lght)),
+      hsl(270,100%,var(--lght)),
+      hsl(300,100%,var(--lght)),
+      hsl(330,100%,var(--lght)),
+      hsl(360,100%,var(--lght))
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  position: relative;
+}
+#X p {
+  text-align: center;
+  align-items: center;
+  vertical-align: middle;
+  flex-grow: 1;
+}
+#X span {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border-radius: 15px 15px 15px 0;
+  rotate: 45deg;
+  translate: -50% -50%;
+}
+#D {
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  display: flex;
+  background: var(--pc);
+  border-radius: 2em;
+  padding: 3px;
+  width: 220px;
+  align-content: center;
+}
+#D b {
+  background-color: var(--opposite);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25pt;
+  width: 25pt;
+}
+#D b:first-child {
+  font-size: 12pt;
+}
+#D b:last-child {
+  font-size: 20pt;
+}
+#D input {
+  flex-grow: 1;
+}
