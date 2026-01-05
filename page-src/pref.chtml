@@ -40,13 +40,13 @@ function updateColorPicker(p, a, b) {
     pos.x = a - p.c.x, 
     pos.y = b - p.c.y
     deg = Math.round(180 * (1 + Math.atan2(pos.y, pos.x) / Math.PI));
-    const scl = 50 / Math.sqrt(Math.pow(pos.x, 2) + Math.pow(pos.y, 2));
+    const scl = 60 / Math.sqrt(Math.pow(pos.x, 2) + Math.pow(pos.y, 2));
     pos.x *= scl;
     pos.y *= scl;
   } else {
     deg = parseInt(a);
-    pos.x = 50 * -Math.cos(deg / 180 * Math.PI);
-    pos.y = 50 * -Math.sin(deg / 180 * Math.PI);
+    pos.x = 60 * -Math.cos(deg / 180 * Math.PI);
+    pos.y = 60 * -Math.sin(deg / 180 * Math.PI);
   }
   p.obj.value = deg;
   pos.x -= p.knob.clientWidth * 0.5;
