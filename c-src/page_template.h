@@ -1,23 +1,22 @@
-#ifndef NEWLINE
+#ifndef SHRINK_PAGE
   #define NEWLINE "\n"
-#endif
-#ifndef TB
   #define TB      "  "
-#endif
-#ifndef TB2X
   #define TB2X    "    "
-#endif
-#ifndef TB3XXX
   #define TB3XXX  "      "
-#endif
-#ifndef TB4XXXX
   #define TB4XXXX "        "
-#endif
+#else
+  #define NEWLINE
+  #define TB      " "
+  #define TB2X    " "
+  #define TB3XXX  " "
+  #define TB4XXXX " "
+#endif // SHRINK_PAGE
+
 static const char * const base_page_template[] = {
   "<!DOCTYPE html>"NEWLINE
   "<html lang='en'>"NEWLINE
   "<head>"NEWLINE
-  TB"<title>"PROJECT_NAME"%s</title>"NEWLINE
+  TB"<title>%s</title>"NEWLINE
   TB"<meta name='viewport' content='width=device-width, initial-scale=1.0'>"NEWLINE
   TB"<meta name='author' content='AriasaProp'>"NEWLINE
   TB"<meta name='description' content='%s'>"NEWLINE
@@ -43,7 +42,7 @@ static const char * const base_page_template[] = {
   TB2X"<nav>"NEWLINE
   TB3XXX"<a%s><h2>"PROJECT_NAME"</h2></a>"NEWLINE
   TB3XXX"<span></span>"NEWLINE,
-  TB3XXX"<a href='%s' class='material-symbols-outlined'>%s</a>"NEWLINE,
+  TB3XXX"<a href='/%s' class='material-symbols-outlined'>%s</a>"NEWLINE,
   TB3XXX"<input id='ai' type='checkbox'>"NEWLINE
   TB3XXX"<label id='al' for='ai' class='material-symbols-outlined'></label>"NEWLINE
   TB3XXX"<form id='ab' action='/' method='GET'>"NEWLINE
@@ -52,7 +51,7 @@ static const char * const base_page_template[] = {
   TB4XXXX"<button type='submit' class='material-symbols-outlined'>&#xe8b6;</button>"NEWLINE
   TB3XXX"</form>"NEWLINE
   TB2X"</nav>"NEWLINE
-  TB"</header>"NEWLINE,
+  TB"</header>"NEWLINE,NEWLINE
   TB"<footer>"NEWLINE
   TB2X"<a href='mailto:ikomangwidiadaariasa12@gmail.com'><p>Google mail</p></a>"NEWLINE
   TB2X"<a href='https://github.com/AriasaProp'><p>Github</p></a>"NEWLINE
