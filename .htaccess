@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^$ bin/static_pages [L]
+RewriteRule ^(.*)$ /bin/static_pages/$1 [L]
