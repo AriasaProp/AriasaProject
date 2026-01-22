@@ -1,1 +1,5 @@
-bin
+bin/exec
+bin/objs
+bin/wasm32
+bin/w.wasm
+bin/w.wat

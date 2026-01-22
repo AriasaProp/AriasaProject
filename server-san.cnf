@@ -1,0 +1,5 @@
+[req]
+distinguished_name=req
+req_extensions=san
+[ san ]
+subjectAltName=DNS:localhost,IP:127.0.0.1

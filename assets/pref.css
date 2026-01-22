@@ -92,7 +92,6 @@ main form label p {
   flex-grow: 1;
 }
 main form label span {
-  content: '';
   position: absolute;
   top: 50%;
   left: 50%;

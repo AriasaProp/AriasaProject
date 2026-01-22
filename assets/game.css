@@ -1,0 +1,24 @@
+canvas {
+  aspect-ratio: 4 / 3;
+  touch-action: none;
+}
+#logging {
+  display: block;
+}
+#logging p {
+  display: block;
+  border: 2px outset var(--opposite);
+}
+@media (min-aspect-ratio: 4/3) {
+  canvas {
+    height: 99vh; /* Use height */
+    width: auto;  /* Maintain aspect ratio */
+  }
+}
+
+@media (max-aspect-ratio: 4/3) {
+  canvas {
+    width: 99vw; /* Use width */
+    height: auto; /* Maintain aspect ratio */
+  }
+}

@@ -1,10 +1,20 @@
+#ifndef _PAGE_DESC_INCLUDE_
+#define _PAGE_DESC_INCLUDE_
 
-typedef struct {
-  const char *titl;
-  const char *name;
-  const char *syml;
-  const char *desc;
-} pf;
+#include "page_gen.h"
+
+static const struct {
+  const char *path;
+  size_t index;
+} urlPath_pages[] = {
+  {"/"        ,0},
+  {"/index"   ,0},
+  {"/hompage" ,0},
+  {"/pref"    ,1},
+  {"/empty"   ,2},
+  {"/game"    ,3},
+};
+
 static const pf page_list[] = {
   {
     .titl = PROJECT_NAME,
@@ -24,4 +34,12 @@ static const pf page_list[] = {
     .syml = "&#xf859",
     .desc = "Empty page."
   },
+  {
+    .titl = PROJECT_NAME" - Game",
+    .name = "game",
+    .syml = "&#xea28",
+    .desc = "Game page."
+  },
 };
+
+#endif // _PAGE_DESC_INCLUDE_
